@@ -88,6 +88,7 @@
     .hero{height:300px}
   }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 </head>
 <body>
 <header class="cover">
@@ -104,6 +105,12 @@
     <div class="stat"><div class="l">ホテル(台北2泊+空港1泊)</div><div class="v">Marriott</div><div class="n">Bonvoy 直予約で特典</div></div>
     <div class="stat"><div class="l">飛行機＋宿 合計(2名)</div><div class="v">約10〜11万円</div><div class="n">食事・観光は別</div></div>
   </div>
+
+
+  <h2>📍 位置マップ</h2>
+  <p class="muted">ピンをタップするとスポット名とGoogleマップへのリンクが出ます。台北市内のまとまりと、左下の桃園空港エリア（ホテル＝最終日泊）との距離感もわかります。</p>
+  <div style="margin:6px 0 10px"><span style="display:inline-flex;align-items:center;gap:6px;margin:0 14px 6px 0;font-size:15px"><span style="width:14px;height:14px;border-radius:50%;background:#c0392b;border:2px solid #fff;box-shadow:0 0 0 1px #ccc"></span>グルメ</span><span style="display:inline-flex;align-items:center;gap:6px;margin:0 14px 6px 0;font-size:15px"><span style="width:14px;height:14px;border-radius:50%;background:#e67e22;border:2px solid #fff;box-shadow:0 0 0 1px #ccc"></span>夜市</span><span style="display:inline-flex;align-items:center;gap:6px;margin:0 14px 6px 0;font-size:15px"><span style="width:14px;height:14px;border-radius:50%;background:#2980b9;border:2px solid #fff;box-shadow:0 0 0 1px #ccc"></span>ホテル</span><span style="display:inline-flex;align-items:center;gap:6px;margin:0 14px 6px 0;font-size:15px"><span style="width:14px;height:14px;border-radius:50%;background:#8e44ad;border:2px solid #fff;box-shadow:0 0 0 1px #ccc"></span>温泉・マッサージ</span><span style="display:inline-flex;align-items:center;gap:6px;margin:0 14px 6px 0;font-size:15px"><span style="width:14px;height:14px;border-radius:50%;background:#16a085;border:2px solid #fff;box-shadow:0 0 0 1px #ccc"></span>Amway</span><span style="display:inline-flex;align-items:center;gap:6px;margin:0 14px 6px 0;font-size:15px"><span style="width:14px;height:14px;border-radius:50%;background:#27ae60;border:2px solid #fff;box-shadow:0 0 0 1px #ccc"></span>観光</span><span style="display:inline-flex;align-items:center;gap:6px;margin:0 14px 6px 0;font-size:15px"><span style="width:14px;height:14px;border-radius:50%;background:#7f8c8d;border:2px solid #fff;box-shadow:0 0 0 1px #ccc"></span>空港</span></div>
+  <div id="map" style="height:480px;border-radius:16px;border:1px solid var(--line);overflow:hidden;z-index:0"></div>
 
   <h2>🏆 今回の本命：地元No.1の魯肉飯</h2>
   <div class="card hl">
@@ -261,5 +268,22 @@
   </footer>
 
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+var PTS=[{"name": "矮仔財滷肉飯", "cat": "food", "lat": 25.13243, "lng": 121.50283, "gm": "矮仔財滷肉飯 北投市場"}, {"name": "金峰魯肉飯", "cat": "food", "lat": 25.03203, "lng": 121.51851, "gm": "金峰魯肉飯"}, {"name": "鼎泰豐 信義本店", "cat": "food", "lat": 25.03352, "lng": 121.5301, "gm": "鼎泰豐 信義本店"}, {"name": "京鼎樓", "cat": "food", "lat": 25.05502, "lng": 121.5261, "gm": "京鼎樓 長春店"}, {"name": "無老鍋 中山店", "cat": "food", "lat": 25.0566, "lng": 121.5326, "gm": "無老鍋 中山店 台北"}, {"name": "阜杭豆漿", "cat": "food", "lat": 25.04421, "lng": 121.52477, "gm": "阜杭豆漿 華山市場"}, {"name": "思慕昔(マンゴーかき氷)", "cat": "food", "lat": 25.0327, "lng": 121.5296, "gm": "思慕昔 永康街"}, {"name": "寧夏夜市", "cat": "market", "lat": 25.05619, "lng": 121.51522, "gm": "寧夏夜市"}, {"name": "饒河街觀光夜市", "cat": "market", "lat": 25.05068, "lng": 121.57598, "gm": "饒河街觀光夜市"}, {"name": "Sheraton Grand Taipei", "cat": "hotel", "lat": 25.04468, "lng": 121.52256, "gm": "Sheraton Grand Taipei"}, {"name": "Sheraton Taoyuan", "cat": "hotel", "lat": 25.0136, "lng": 121.2155, "gm": "Sheraton Taoyuan Hotel"}, {"name": "北投温泉", "cat": "relax", "lat": 25.13658, "lng": 121.50719, "gm": "北投溫泉"}, {"name": "6星集(マッサージ)", "cat": "relax", "lat": 25.0455, "lng": 121.517, "gm": "6星集足體養生會館 台北車站"}, {"name": "台湾Amway 台北体験中心", "cat": "shop", "lat": 25.0518, "lng": 121.5492, "gm": "安麗 敦化北路168號"}, {"name": "艋舺龍山寺", "cat": "sight", "lat": 25.03725, "lng": 121.49988, "gm": "艋舺龍山寺"}, {"name": "西門町", "cat": "sight", "lat": 25.04827, "lng": 121.50838, "gm": "西門町"}, {"name": "國立故宮博物院", "cat": "sight", "lat": 25.10157, "lng": 121.54886, "gm": "國立故宮博物院"}, {"name": "台北101", "cat": "sight", "lat": 25.03384, "lng": 121.5645, "gm": "台北101"}, {"name": "桃園国際空港(TPE)", "cat": "transit", "lat": 25.07932, "lng": 121.2346, "gm": "桃園國際機場"}];
+var COL={food:"#c0392b",market:"#e67e22",hotel:"#2980b9",relax:"#8e44ad",shop:"#16a085",sight:"#27ae60",transit:"#7f8c8d"};
+document.addEventListener("DOMContentLoaded",function(){
+ var map=L.map("map",{scrollWheelZoom:false});
+ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap"}).addTo(map);
+ var g=[];
+ PTS.forEach(function(p){
+  var m=L.circleMarker([p.lat,p.lng],{radius:9,color:"#fff",weight:2,fillColor:COL[p.cat]||"#555",fillOpacity:1});
+  var u="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(p.gm);
+  m.bindPopup("<b>"+p.name+"</b><br><a href=\""+u+"\" target=\"_blank\">Googleマップで開く &#8599;</a>");
+  m.addTo(map); g.push([p.lat,p.lng]);
+ });
+ map.fitBounds(g,{padding:[30,30]});
+});
+</script>
 </body>
 </html>
